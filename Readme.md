@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Sergei Mozolevsky](https://up.htmlacademy.ru/javascript/8/user/161511).
-* Наставник: `Давид Классен`.
+* Наставник: [Давид Классен] (https://up.htmlacademy.ru/javascript/8/user/329651).
 
 ---
 
