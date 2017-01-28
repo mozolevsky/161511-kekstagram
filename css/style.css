@@ -1,0 +1,14 @@
+
+.upload-filter-label-phobos, .filter-phobos {
+  webkit-filter: hue-rotate(90deg);
+  filter: hue-rotate(90deg);
+}
+
+.upload-filter-label-heat, .filter-heat {
+  webkit-filter: brightness(1.8) saturate(2.3);
+  filter: brightness(1.8) saturate(2.3);
+}
+
+.upload-resize-controls-button:hover {
+  cursor: pointer;
+}
