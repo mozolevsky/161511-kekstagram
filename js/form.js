@@ -22,24 +22,34 @@ function hideElement(element) {
   element.classList.add('invisible');
 }
 
-function getFilterName(attr) {
-  return attr.slice(7);
+function getFilterName(target) {
+  var attr = target.parentElement.getAttribute('for');
+  return attr.replace('upload-', '');
 }
 
 function reduceMainImg() {
   if (mainImageScale > 25) {
     mainImageScale = mainImageScale - 25;
-    mainImageScaleBlock.value = mainImageScale + '%';
-    mainImage.style.transform = 'scale(' + mainImageScale * 0.01 + ')';
+    changeScaleMainImg();
   }
 }
 
 function enlargeMainImg() {
   if (mainImageScale < 100) {
     mainImageScale += 25;
-    mainImageScaleBlock.value = mainImageScale + '%';
-    mainImage.style.transform = 'scale(' + mainImageScale * 0.01 + ')';
+    changeScaleMainImg();
   }
+}
+
+function changeScaleMainImg() {
+  mainImageScaleBlock.value = mainImageScale + '%';
+  mainImage.style.transform = 'scale(' + mainImageScale * 0.01 + ')';
+}
+
+function isTarget(target, cssClass) {
+  var targetStatus;
+  targetStatus = target.className.indexOf(cssClass) !== -1;
+  return targetStatus;
 }
 
 inputUploadFile.addEventListener('change', function () {
@@ -55,17 +65,17 @@ uploadFormCancel.addEventListener('click', function () {
 croppingImgForm.addEventListener('click', function (event) {
   var target = event.target;
 
-  if (~target.className.indexOf('upload-filter-preview')) {
-    var attr = target.parentElement.getAttribute('for');
-    var filterName = getFilterName(attr);
-    mainImage.className = 'filter-image-preview ' + filterName;
+  if (isTarget(target, 'upload-filter-preview')) {
+    mainImage.className = 'filter-image-preview ' + getFilterName(target);
   }
 
-  if (~target.className.indexOf('upload-resize-controls-button-dec')) {
+  if (isTarget(target, 'upload-resize-controls-button-dec')) {
     reduceMainImg();
   }
 
-  if (~target.className.indexOf('upload-resize-controls-button-inc')) {
+  if (isTarget(target, 'upload-resize-controls-button-inc')) {
     enlargeMainImg();
   }
 });
+
+
