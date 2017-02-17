@@ -14,6 +14,9 @@ var mainImage = getElement('.filter-image-preview');
 var mainImageScaleBlock = getElement('.upload-resize-controls-value');
 var mainImageScale = parseInt(mainImageScaleBlock.getAttribute('value'), 10);
 
+var ENTER_KEY_CODE = 13;
+var ESC_KEY_CODE = 27;
+
 function showElement(element) {
   element.classList.remove('invisible');
 }
@@ -47,14 +50,54 @@ function isTarget(target, cssClass) {
   return targetStatus;
 }
 
+function checkKeyCode(event, key) {
+  return event.keyCode && event.keyCode === key;
+}
+
+var listenEscOnForm = function () {
+  document.addEventListener('keydown', function (event) {
+    if (checkKeyCode(event, ESC_KEY_CODE)) {
+      hideElement(croppingImgFormWrapper);
+      showElement(uploadForm);
+    }
+  });
+};
+
+function changeState(elem, stateName) {
+  if (elem.hasAttribute(stateName)) {
+    if (elem.getAttribute(stateName) === 'true') {
+      elem.setAttribute(stateName, false);
+    } else {
+      elem.setAttribute(stateName, true);
+    }
+  }
+}
+
 inputUploadFile.addEventListener('change', function () {
   hideElement(uploadForm);
   showElement(croppingImgFormWrapper);
+  listenEscOnForm();
+  changeState(croppingImgFormWrapper, 'aria-hidden');
 });
 
 uploadFormCancel.addEventListener('click', function () {
   hideElement(croppingImgFormWrapper);
   showElement(uploadForm);
+  changeState(croppingImgFormWrapper, 'aria-hidden');
+});
+
+croppingImgForm.addEventListener('keydown', function (event) {
+  var target = event.target;
+
+  if (isTarget(target, 'upload-form-cancel') && checkKeyCode(event, ENTER_KEY_CODE)) {
+    hideElement(croppingImgFormWrapper);
+    showElement(uploadForm);
+    changeState(croppingImgFormWrapper, 'aria-hidden');
+  }
+
+  if (isTarget(target, 'upload-filter-label') && checkKeyCode(event, ENTER_KEY_CODE)) {
+    mainImage.className = 'filter-image-preview ' + getFilterName(target);
+  }
 });
 
 window.initializeFilters(croppingImgForm, 'upload-filter-preview', mainImage);
