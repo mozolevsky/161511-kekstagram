@@ -91,7 +91,6 @@ uploadFormCancel.addEventListener('click', function () {
   changeState(croppingImgFormWrapper, 'aria-hidden');
 });
 
-
 croppingImgForm.addEventListener('keydown', function (event) {
   var target = event.target;
 
