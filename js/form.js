@@ -22,11 +22,6 @@ function hideElement(element) {
   element.classList.add('invisible');
 }
 
-function getFilterName(target) {
-  var attr = target.parentElement.getAttribute('for');
-  return attr.replace('upload-', '');
-}
-
 function reduceMainImg() {
   if (mainImageScale > 25) {
     mainImageScale = mainImageScale - 25;
@@ -62,12 +57,10 @@ uploadFormCancel.addEventListener('click', function () {
   showElement(uploadForm);
 });
 
+window.initializeFilters(croppingImgForm, 'upload-filter-preview', mainImage);
+
 croppingImgForm.addEventListener('click', function (event) {
   var target = event.target;
-
-  if (isTarget(target, 'upload-filter-preview')) {
-    mainImage.className = 'filter-image-preview ' + getFilterName(target);
-  }
 
   if (isTarget(target, 'upload-resize-controls-button-dec')) {
     reduceMainImg();
