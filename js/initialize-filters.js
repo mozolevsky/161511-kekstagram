@@ -1,22 +1,24 @@
 'use strict';
 
-window.initializeFilters = function (clickArea, cssClass, filterObject) {
+window.initializeFilters = function (clickArea, cssClass, filterObject, key) {
+
 
   function getFilterName(target) {
-    var attr = target.parentElement.getAttribute('for');
+    var attr = target.getAttribute('for');
     return attr.replace('upload-', '');
-  }
-
-  function isTarget(target) {
-    var targetStatus;
-    targetStatus = target.className.indexOf(cssClass) !== -1;
-    return targetStatus;
   }
 
   clickArea.addEventListener('click', function (event) {
     var target = event.target;
 
-    if (isTarget(target)) {
+    if (window.isTarget(target.parentNode, cssClass)) {
+      filterObject.className = 'filter-image-preview ' + getFilterName(target.parentNode);
+    }
+  });
+
+  clickArea.addEventListener('keydown', function (event) {
+    var target = event.target;
+    if (window.isTarget(target, cssClass) && window.checkKeyCode(event, key)) {
       filterObject.className = 'filter-image-preview ' + getFilterName(target);
     }
   });
