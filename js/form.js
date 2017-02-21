@@ -12,7 +12,6 @@ var uploadFormCancel = getElement('.upload-form-cancel');
 
 var mainImage = getElement('.filter-image-preview');
 
-
 var ENTER_KEY_CODE = 13;
 var ESC_KEY_CODE = 27;
 
@@ -74,6 +73,6 @@ croppingImgForm.addEventListener('keydown', function (event) {
 });
 
 window.initializeFilters(croppingImgForm, 'upload-filter-label', mainImage, ENTER_KEY_CODE);
-window.initializeScale(croppingImgForm, 25);
+window.initializeScale(croppingImgForm, 25, 50);
 
 

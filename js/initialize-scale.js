@@ -1,8 +1,15 @@
 'use strict';
 
-window.initializeScale = function (element, step) {
+window.initializeScale = function (element, step, scale) {
   var mainImageScaleBlock = window.getElement('.upload-resize-controls-value');
-  var currentScale = parseInt(mainImageScaleBlock.getAttribute('value'), 10);
+  var currentScale;
+
+  if (scale) {
+    currentScale = scale;
+    changeScaleMainImg();
+  } else {
+    currentScale = parseInt(mainImageScaleBlock.getAttribute('value'), 10);
+  }
 
   function reduceMainImg() {
     if (currentScale > 25) {
