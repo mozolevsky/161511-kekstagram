@@ -1,7 +1,7 @@
 'use strict';
 
-window.initializeScale = function (element, step, scale) {
-  var mainImageScaleBlock = window.getElement('.upload-resize-controls-value');
+(function initializeScale(element, step, scale) {
+  var mainImageScaleBlock = document.querySelector('.upload-resize-controls-value');
   var currentScale;
 
   if (scale) {
@@ -33,12 +33,14 @@ window.initializeScale = function (element, step, scale) {
   element.addEventListener('click', function (event) {
     var target = event.target;
 
-    if (window.isTarget(target, 'upload-resize-controls-button-dec')) {
+    if (window.utils.hasClass(target, 'upload-resize-controls-button-dec')) {
       reduceMainImg();
     }
 
-    if (window.isTarget(target, 'upload-resize-controls-button-inc')) {
+    if (window.utils.hasClass(target, 'upload-resize-controls-button-inc')) {
       enlargeMainImg();
     }
   });
-};
+})(window.croppingImgForm, 25, 100);
+
+

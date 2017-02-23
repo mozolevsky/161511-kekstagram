@@ -1,26 +1,27 @@
 'use strict';
 
-window.initializeFilters = function (clickArea, cssClass, filterObject, key) {
-
-
+(function () {
   function getFilterName(target) {
     var attr = target.getAttribute('for');
     return attr.replace('upload-', '');
   }
 
-  clickArea.addEventListener('click', function (event) {
-    var target = event.target;
+  var initializeFilters = function (clickArea, cssClass, filterObject) {
 
-    if (window.isTarget(target.parentNode, cssClass)) {
-      filterObject.className = 'filter-image-preview ' + getFilterName(target.parentNode);
-    }
-  });
+    clickArea.addEventListener('click', function (event) {
+      var target = event.target;
 
-  clickArea.addEventListener('keydown', function (event) {
-    var target = event.target;
-    if (window.isTarget(target, cssClass) && window.checkKeyCode(event, key)) {
-      filterObject.className = 'filter-image-preview ' + getFilterName(target);
-    }
-  });
+      if (window.utils.hasClass(target.parentNode, cssClass)) {
+        filterObject.className = 'filter-image-preview ' + getFilterName(target.parentNode);
+      }
+    });
 
-};
+    clickArea.addEventListener('keydown', function (event) {
+      var target = event.target;
+      if (window.utils.hasClass(target, cssClass) && window.utils.isEnterPressed(event)) {
+        filterObject.className = 'filter-image-preview ' + getFilterName(target);
+      }
+    });
+  };
+  initializeFilters(window.croppingImgForm, 'upload-filter-label', window.mainImage);
+})();
