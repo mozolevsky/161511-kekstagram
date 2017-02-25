@@ -1,27 +1,27 @@
 'use strict';
 
 (function () {
-  function getFilterName(target) {
+  var getFilter = function (target, elem) {
     var attr = target.getAttribute('for');
-    return attr.replace('upload-', '');
-  }
+    elem.className = 'filter-image-preview ' + attr.replace('upload-', '');
+  };
 
-  var initializeFilters = function (clickArea, cssClass, filterObject) {
+  var initializeFilters = function (clickArea, cssClass, filterObject, applyFilter) {
 
     clickArea.addEventListener('click', function (event) {
       var target = event.target;
 
       if (window.utils.hasClass(target.parentNode, cssClass)) {
-        filterObject.className = 'filter-image-preview ' + getFilterName(target.parentNode);
+        applyFilter(target.parentNode, filterObject);
       }
     });
 
     clickArea.addEventListener('keydown', function (event) {
       var target = event.target;
       if (window.utils.hasClass(target, cssClass) && window.utils.isEnterPressed(event)) {
-        filterObject.className = 'filter-image-preview ' + getFilterName(target);
+        applyFilter(target, filterObject);
       }
     });
   };
-  initializeFilters(window.croppingImgForm, 'upload-filter-label', window.mainImage);
+  initializeFilters(window.croppingImgForm, 'upload-filter-label', window.mainImage, getFilter);
 })();
