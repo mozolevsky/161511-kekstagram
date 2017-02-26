@@ -33,7 +33,6 @@
         return function (event) {
           event.preventDefault();
           window.showGallery(pictures[currentValue]);
-          /*window.console.log(pictures[currentValue]);*/
         };
       };
       allPictures[j].addEventListener('click', makeListener(event));
