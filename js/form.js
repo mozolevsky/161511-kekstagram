@@ -29,7 +29,7 @@ uploadFormCancel.addEventListener('click', function () {
 croppingImgForm.addEventListener('keydown', function (event) {
   var target = event.target;
 
-  if (target === uploadFormCancel && window.utils.isEnterPressed(event)) {
+  if (target === uploadFormCancel && window.utils.isEscPressed(event)) {
     window.utils.hideElement(croppingImgFormWrapper);
     window.utils.showElement(uploadForm);
     removeEventListener('keydown', listenEscOnForm);

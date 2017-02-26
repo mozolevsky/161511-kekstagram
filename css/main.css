@@ -509,7 +509,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
   display: inline-block;
   box-sizing: border-box;
-  width: 182px;
+  width: 179px;
   height: 182px;
   margin-right: 14px;
   margin-bottom: 14px;
