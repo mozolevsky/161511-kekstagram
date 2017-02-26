@@ -10,7 +10,6 @@
 
   window.load(url, function (data) {
     pictures = JSON.parse(data);
-    var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < pictures.length; i++) {
       var newElem = picTemplateToClone.cloneNode(true);
@@ -24,10 +23,21 @@
       newElemComments.insertAdjacentHTML('afterbegin', pictures[i].comments.length);
 
       picturesContainer.appendChild(newElem);
+    }
 
+    var allPictures = document.querySelectorAll('.picture');
+
+    for (var j = 0; j < allPictures.length; j++) {
+      var makeListener = function () {
+        var currentValue = j;
+        return function (event) {
+          event.preventDefault();
+          window.showGallery(pictures[currentValue]);
+          /*window.console.log(pictures[currentValue]);*/
+        };
+      };
+      allPictures[j].addEventListener('click', makeListener(event));
     }
   });
-
-
 })();
 
