@@ -4,17 +4,17 @@ window.showGallery = (function () {
   var galleryOverlay = document.querySelector('.gallery-overlay');
   var galleryClose = document.querySelector('.gallery-overlay-close');
 
-  return function (data) {
+  return function (elem) {
     window.utils.showElement(galleryOverlay);
 
-    var galleryImg = galleryOverlay.querySelector('img');
-    galleryImg.src = data.url;
+    var galleryBigImg = galleryOverlay.querySelector('img');
+    galleryBigImg.src = elem.children[0].src;
 
     var galleryLikes = galleryOverlay.querySelector('.likes-count');
-    galleryLikes.innerHTML = data.likes;
+    galleryLikes.innerHTML = elem.children[1].children[0].innerText;
 
     var galleryComments = galleryOverlay.querySelector('.comments-count');
-    galleryComments.innerHTML = data.comments.length;
+    galleryComments.innerHTML = elem.children[1].children[1].innerText;
 
     galleryClose.addEventListener('click', function () {
       window.utils.hideElement(galleryOverlay);
